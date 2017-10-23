@@ -10,12 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var bodyTextField: UITextField!
-    
-    
+    // MARK: Properties
     let request: Request = Request()
     
+    
+    // MARK: IBOutlets
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var bodyTextField: UITextField!
+    @IBOutlet weak var deleteNumTextField: UITextField!
+    
+    
+    // MARK: IBActions
     @IBAction func groupListButton(_ sender: Any) {
         
         request.getGroupList()
@@ -29,7 +34,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func memoSubmitButton(_ sender: Any) {
-    
         
         guard let url = URL(string: "https://api.docbase.io/teams/docbaseapipractice/posts") else { return }
       
@@ -66,6 +70,15 @@ class ViewController: UIViewController {
             }
         }.resume()
     }
+    
+    @IBAction func deleteMemoButton(_ sender: Any) {
+        
+        request.delete(num: deleteNumTextField.text!)
+        
+        
+    }
+    
+    
 
 }
 
