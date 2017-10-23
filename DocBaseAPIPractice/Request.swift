@@ -65,32 +65,61 @@ class Request {
         }.resume()
     }
     
-    // POST METHOD
-    func post(body: [String : Any]) throws {
+    
+    // DELETE METHOD
+    func delete(num: String) -> Void {
+    
         
-        guard let url = URL(string: "https://api.docbase.io/teams/docbaseapipractice/posts") else { return }
+        guard let url = URL(string: "https://api.docbase.io/teams/docbaseapipractice/posts/\(num)") else { return }
         
         var request: URLRequest = URLRequest(url: url)
         
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("beNCf4mxkKXLLRrBqEwH", forHTTPHeaderField: "X-DocBaseToken")
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
-        
         session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
-            }
+            //if let response = response {
+            //  print(response)
+            //}
             if let data = data {
+                print(data)
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     print(json)
-                }catch {
+                } catch {
                     print(error)
                 }
             }
-        }.resume()
+            }.resume()
     }
+    
+    
+//    // POST METHOD
+//    func postSubmitMemo(body: [String : Any]) throws {
+//
+//        guard let url = URL(string: "https://api.docbase.io/teams/docbaseapipractice/posts") else { return }
+//
+//        var request: URLRequest = URLRequest(url: url)
+//
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("beNCf4mxkKXLLRrBqEwH", forHTTPHeaderField: "X-DocBaseToken")
+//        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
+//
+//        session.dataTask(with: request) { (data, response, error) in
+//            if let response = response {
+//                print(response)
+//            }
+//            if let data = data {
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                    print(json)
+//                }catch {
+//                    print(error)
+//                }
+//            }
+//        }.resume()
+//    }
     
     
 }
