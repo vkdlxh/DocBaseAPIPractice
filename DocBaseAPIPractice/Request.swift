@@ -62,6 +62,14 @@ class Request {
                         
                         let parsePost = ParsePost(dict: post as! [String:Any])
                         print(parsePost?.body)
+                        
+                        //出力して確認する
+                        if let tags = parsePost?.tags {
+                            for tag in tags {
+                                print(tag)
+                            }
+                        }
+                        
                     }
                 } catch {
                     print(error)
