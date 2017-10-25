@@ -29,7 +29,7 @@ class Request {
             if let data = data {
                 print(data)
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                     print(json)
                 } catch {
                     print(error)
@@ -54,10 +54,15 @@ class Request {
             //  print(response)
             //}
             if let data = data {
-                print(data)
+                //print(data)
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                    
+                    for post in json["posts"] as! [Any] {
+                        
+                        let parsePost = ParsePost(dict: post as! [String:Any])
+                        print(parsePost?.body)
+                    }
                 } catch {
                     print(error)
                 }

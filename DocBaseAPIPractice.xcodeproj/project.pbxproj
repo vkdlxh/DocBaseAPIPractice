@@ -13,6 +13,8 @@
 		DA042A5E1F99D24500F2EAC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA042A5D1F99D24500F2EAC7 /* Assets.xcassets */; };
 		DA042A611F99D24500F2EAC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA042A5F1F99D24500F2EAC7 /* LaunchScreen.storyboard */; };
 		DA042A691F99D25D00F2EAC7 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA042A681F99D25D00F2EAC7 /* Request.swift */; };
+		DA126C511FA021040072E946 /* ParsePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA126C501FA021040072E946 /* ParsePost.swift */; };
+		DA82561C1F9F0ABE00F32365 /* ParseJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82561B1F9F0ABE00F32365 /* ParseJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		DA042A601F99D24500F2EAC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA042A621F99D24500F2EAC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA042A681F99D25D00F2EAC7 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		DA126C501FA021040072E946 /* ParsePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePost.swift; sourceTree = "<group>"; };
+		DA82561B1F9F0ABE00F32365 /* ParseJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				DA042A681F99D25D00F2EAC7 /* Request.swift */,
+				DA82561B1F9F0ABE00F32365 /* ParseJSON.swift */,
+				DA126C501FA021040072E946 /* ParsePost.swift */,
 				DA042A561F99D24500F2EAC7 /* AppDelegate.swift */,
 				DA042A581F99D24500F2EAC7 /* ViewController.swift */,
 				DA042A5A1F99D24500F2EAC7 /* Main.storyboard */,
@@ -143,6 +149,8 @@
 				DA042A591F99D24500F2EAC7 /* ViewController.swift in Sources */,
 				DA042A691F99D25D00F2EAC7 /* Request.swift in Sources */,
 				DA042A571F99D24500F2EAC7 /* AppDelegate.swift in Sources */,
+				DA82561C1F9F0ABE00F32365 /* ParseJSON.swift in Sources */,
+				DA126C511FA021040072E946 /* ParsePost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
