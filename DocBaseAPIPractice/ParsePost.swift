@@ -16,11 +16,11 @@ struct ParsePost {
     let draft: Bool
     let url: String
     let created_at: String
-    var tags =  [Tag]()     //宣言しながらインスタンス生成しておく
+    var tags = [Tag]()     //宣言しながらインスタンス生成しておく
     let scope: String
-//    let groups: Group
+    var groups = [Group]()
     let user: User
-//    let comments: Comment
+    var comments = [Comment]()
     
     init?(dict: [String: Any]) {
         
@@ -31,7 +31,7 @@ struct ParsePost {
         guard let url = dict["url"] as? String else { return nil }
         guard let created_at = dict["created_at"] as? String else { return nil }
         
-        if let items = dict["tags"] as? [[String: Any]] {
+        if let items = dict["tags"] as? [[String: String]] {
 
             for item in items {
                 
@@ -42,14 +42,30 @@ struct ParsePost {
             }
         } else { return nil }
         
-//        guard let tags = Tag(dict: tagDict) else { return nil }
         guard let scope = dict["scope"] as? String else { return nil }
-        guard let groupDict = dict["groups"] as? [Any] else { return nil }
-//        guard let groups = Group(dict: groupDict) else { return nil }
+        
+        if let items = dict["groups"] as? [[String: Any]] {
+            
+            for item in items {
+                
+                if let group = Group(group: item) {
+                    groups.append(group)
+                }
+            }
+        } else { return nil }
+
         guard let userDict = dict["user"] as? [String: Any] else { return nil }
-        guard let user = User(dict: userDict) else { return nil }
-        guard let commentDict = dict["comments"] as? [Any] else { return nil }
-//        guard let comments = Comment(dict: commentDict) else { return nil }
+        guard let user = User(user: userDict) else { return nil }
+        
+        if let items = dict["comments"] as? [[String: Any]] {
+            
+            for item in items {
+                if let comment = Comment(comment: item) {
+                    comments.append(comment)
+                }
+            }
+        } else { return nil }
+
         
         self.id = id
         self.title = title
@@ -57,45 +73,42 @@ struct ParsePost {
         self.draft = draft
         self.url = url
         self.created_at = created_at
-//        self.tags = tag
         self.scope = scope
-//        self.groups = groups
         self.user = user
-//        self.comments = comments
     }
     
     struct Tag {
         var name: String
         
-        init?(tag: [String: Any]) {
-            guard let name = tag["name"] as? String else { return nil }
+        init?(tag: [String: String]) {
+            guard let name = tag["name"] else { return nil }
     
             self.name = name
         }
     }
     
-//    struct Group {
-//        let id: Int
-//        let name: String
-//
-//        init?(dict: [String: Any]) {
-//            guard let id = dict["id"] as? Int else { return nil }
-//            guard let name = dict["name"] as? String else { return nil }
-//
-//            self.id = id
-//            self.name = name
-//        }
-//    }
+    struct Group {
+        let id: Int
+        let name: String
+
+        init?(group: [String: Any]) {
+            guard let id = group["id"] as? Int else { return nil }
+            guard let name = group["name"] as? String else { return nil }
+
+            self.id = id
+            self.name = name
+        }
+    }
     
     struct User {
         let id: Int
         let name: String
         let profile_image_url: String
         
-        init?(dict: [String: Any]) {
-            guard let id = dict["id"] as? Int else { return nil }
-            guard let name = dict["name"] as? String else { return nil }
-            guard let profile_image_url = dict["profile_image_url"] as? String else { return nil }
+        init?(user: [String: Any]) {
+            guard let id = user["id"] as? Int else { return nil }
+            guard let name = user["name"] as? String else { return nil }
+            guard let profile_image_url = user["profile_image_url"] as? String else { return nil }
             
             self.id = id
             self.name = name
@@ -104,24 +117,24 @@ struct ParsePost {
         }
     }
     
-//    struct Comment {
-//        let id: Int
-//        let body: String
-//        let created_at: String
-//        let user: User?
-//
-//        init?(dict: [String: Any]) {
-//            guard let id = dict["id"] as? Int else { return nil }
-//            guard let body = dict["body"] as? String else { return nil }
-//            guard let created_at = dict["created_at"] as? String else { return nil }
-//            guard let userDict = dict["user"] as? [String: Any] else { return nil }
-//            guard let user = User(dict: userDict) else { return nil }
-//
-//            self.id = id
-//            self.body = body
-//            self.created_at = created_at
-//            self.user = user
-//        }
-//    }
+    struct Comment {
+        let id: Int
+        let body: String
+        let created_at: String
+        let user: User?
+
+        init?(comment: [String: Any]) {
+            guard let id = comment["id"] as? Int else { return nil }
+            guard let body = comment["body"] as? String else { return nil }
+            guard let created_at = comment["created_at"] as? String else { return nil }
+            guard let userDict = comment["user"] as? [String: Any] else { return nil }
+            guard let user = User(user: userDict) else { return nil }
+
+            self.id = id
+            self.body = body
+            self.created_at = created_at
+            self.user = user
+        }
+    }
 }
 
