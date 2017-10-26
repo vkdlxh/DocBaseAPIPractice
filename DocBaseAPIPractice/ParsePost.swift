@@ -16,7 +16,7 @@ struct ParsePost {
     let draft: Bool
     let url: String
     let created_at: String
-//    let tags: Tag
+    var tags =  [Tag]()     //宣言しながらインスタンス生成しておく
     let scope: String
 //    let groups: Group
     let user: User
@@ -31,18 +31,17 @@ struct ParsePost {
         guard let url = dict["url"] as? String else { return nil }
         guard let created_at = dict["created_at"] as? String else { return nil }
         
-        
-        // FIXME:
-        if let tagDict = dict["tags"] as? [[String: Any]] {
+        if let items = dict["tags"] as? [[String: Any]] {
 
-            for tags in tagDict {
+            for item in items {
                 
-                let tag = Tag(tag: tags as! [String:Any])
-                
+                if let tag = Tag(tag:item) {
+                    //配列で保存
+                    tags.append(tag)
+                }
             }
-            
-
         } else { return nil }
+        
 //        guard let tags = Tag(dict: tagDict) else { return nil }
         guard let scope = dict["scope"] as? String else { return nil }
         guard let groupDict = dict["groups"] as? [Any] else { return nil }
