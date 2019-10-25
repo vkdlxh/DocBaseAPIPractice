@@ -10,18 +10,36 @@ import Foundation
 
 class Request {
     
+    enum MethodValue: String {
+        case get = "GET"
+        case post = "POST"
+        case put = "PUT"
+        case patch = "PATCH"
+        case delete = "DELETE"
+    }
+    
     let session: URLSession = URLSession.shared
+    
+    func requestValue(url: URL, httpMethod: MethodValue) -> URLRequest {
+        
+        let apiKey: String = "beNCf4mxkKXLLRrBqEwH"
+        
+        var request: URLRequest = URLRequest(url: url)
+        
+        request.httpMethod = httpMethod.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(apiKey, forHTTPHeaderField: "X-DocBaseToken")
+        
+        return request
+    }
     
     // GET METHOD
     func getGroupList() -> Void {
         
         guard let url = URL(string: "https://api.docbase.io/teams/docbaseapipractice/groups") else { return }
         
-        var request: URLRequest = URLRequest(url: url)
+        let request = requestValue(url: url, httpMethod: .get)
         
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("beNCf4mxkKXLLRrBqEwH", forHTTPHeaderField: "X-DocBaseToken")
         session.dataTask(with: request) { (data, response, error) in
             //if let response = response {
               //  print(response)
